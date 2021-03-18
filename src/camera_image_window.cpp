@@ -46,7 +46,7 @@ void cameraLoop() {
 			continueToGrabe = camera.read(frameBGR);
 			if(continueToGrabe) {
 				imageMutex.lock();
-				cv::cvtColor(frameBGR, frame, CV_BGR2RGB);
+				cv::cvtColor(frameBGR, frame, cv::COLOR_RGB2BGR);
 				imageMutex.unlock();
 				dispatcher.emit();
 			}
@@ -65,9 +65,9 @@ bool initializeCamera(int cameraIndex) {
 	bool result = camera.open(cameraIndex);
 	
 	if(result) {
-		camera.set(CV_CAP_PROP_FRAME_WIDTH, 640);
-		camera.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
-		camera.set(CV_CAP_PROP_FPS, 30);
+		camera.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+		camera.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+		camera.set(cv::CAP_PROP_FPS, 30);
 		//warn up
 		//just grab and discard
 		for(int i = 0; i < 3; i++) {
